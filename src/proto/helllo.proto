@@ -1,5 +1,13 @@
 syntax = "proto3"
 
 service helloWorld {
-    
+    rpc helloTest(HelloTestReq) returns (HelloTestResp) {}
+}
+
+message HelloTestReq {
+    string hello_text = 1;
+}
+
+message HelloTestResp {
+    string hello_response = 1;
 }
