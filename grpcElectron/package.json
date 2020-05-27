@@ -61,6 +61,7 @@
   "devDependencies": {
     "@grpc/proto-loader": "^0.5.4",
     "ajv": "^6.5.0",
+    "ant-design-vue": "^1.6.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-minify-webpack-plugin": "^0.3.1",

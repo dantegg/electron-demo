@@ -24,6 +24,9 @@
           <button class="alt" @click="open('https://electron.atom.io/docs/')">Electron</button>
           <button class="alt" @click="open('https://vuejs.org/v2/guide/')">Vue.js</button>
           <button class="alt" @click="testOpen()">test</button>
+          <a-button type="primary">
+      Primary
+    </a-button>
         </div>
       </div>
     </main>
@@ -113,7 +116,7 @@
     margin-bottom: 10px;
   }
 
-  .doc button {
+  /* .doc button {
     font-size: .8em;
     cursor: pointer;
     outline: none;
@@ -125,7 +128,7 @@
     transition: all 0.15s ease;
     box-sizing: border-box;
     border: 1px solid #4fc08d;
-  }
+  } */
 
   .doc button.alt {
     color: #42b983;

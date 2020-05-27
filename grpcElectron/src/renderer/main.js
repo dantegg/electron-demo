@@ -2,8 +2,15 @@ import Vue from 'vue'
 import axios from 'axios'
 
 import App from './App'
+import Antd from 'ant-design-vue';
 import router from './router'
 import store from './store'
+
+import 'ant-design-vue/dist/antd.css';
+
+Vue.config.productionTip = false;
+
+Vue.use(Antd);
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 
