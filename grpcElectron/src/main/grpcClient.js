@@ -8,7 +8,8 @@ const testProto = grpc.load(PROTO_PATH).helloworld;
 
 const client = new testProto.Greeter('0.0.0.0:50051', grpc.credentials.createInsecure());
 
-client.SayHello({name:'test', city:11}, function(err, response) {
+client.SayHello({name:'test', city:'11'}, function(err, response) {
+    console.log("get result success");
     console.log("result is ->", response);
 })
 
