@@ -8,18 +8,18 @@ var fs = require('fs');
 // 从 proto 文件加载服务描述符
 const PROTO_PATH = path.resolve(__dirname, 'protos/helloworld.proto');
 const PROTO_PATH2 = path.resolve(__dirname, 'protos/test.proto')
-console.log("path is " + PROTO_PATH2)
+console.log("path is " + PROTO_PATH)
 
 fs.writeFileSync(PROTO_PATH2, 'this is a demo test');
 
 const packageDefinition = protoLoader.loadSync(
   PROTO_PATH,
   {
-      // keepCase: true,
-      // longs: String,
-      // enums: String,
-      // defaults: true,
-      // oneofs: true
+      keepCase: true,
+      longs: String,
+      enums: String,
+      defaults: true,
+      oneofs: true
   }
 );
 const hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
