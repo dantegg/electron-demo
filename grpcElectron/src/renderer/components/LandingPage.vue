@@ -20,6 +20,12 @@
         console.log("test");
         this.foo.getTest();
         console.log(this.foo)
+        console.log(ipcRenderer.sendSync('synchronous-message', 'ping')) // prints "pong"
+        ipcRenderer.on('asynchronous-reply', (event, arg) => {
+            console.log("async: " + arg) // prints "pong"
+        })
+        ipcRenderer.send('asynchronous-message', 'ping')
+        console.log("=========================")
         this.grpcClient.sendGrpcRequest();
       }
     }
