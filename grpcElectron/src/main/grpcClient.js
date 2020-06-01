@@ -1,5 +1,5 @@
 const path = require('path');
-const grpc = require('grpc');
+// const grpc = require('grpc');
 
 // const PROTO_PATH = path.resolve(__dirname, '../../protos/helloworld.proto');
 // console.log("grpc proto : " + PROTO_PATH);

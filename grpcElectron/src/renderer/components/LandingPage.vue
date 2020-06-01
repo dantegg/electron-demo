@@ -8,7 +8,7 @@
 
 <script>
   import SystemInformation from './LandingPage/SystemInformation'
-
+  import { ipcRenderer } from 'electron'
   export default {
     name: 'landing-page',
     components: { SystemInformation },
