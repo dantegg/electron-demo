@@ -11,7 +11,8 @@ const MinifyPlugin = require("babel-minify-webpack-plugin")
 let mainConfig = {
   entry: {
     main: path.join(__dirname, '../src/main/index.js'),
-    foo: path.join(__dirname, '../src/main/foo.js')
+    // foo: path.join(__dirname, '../src/main/foo.js'),
+    grpcClient: path.join(__dirname, '../src/main/grpcClient.js')
   },
   externals: [
     ...Object.keys(dependencies || {})

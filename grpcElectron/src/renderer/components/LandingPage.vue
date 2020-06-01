@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-button type="primary">
+    <a-button type="primary" @click="testOpen()">
       Primary
     </a-button>
   </div>
@@ -20,6 +20,7 @@
         console.log("test");
         this.foo.getTest();
         console.log(this.foo)
+        this.grpcClient.sendGrpcRequest();
       }
     }
   }
