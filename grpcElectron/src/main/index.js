@@ -1,5 +1,5 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
-
+import { sendGrpcRequest } from './grpcClient'
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -77,4 +77,5 @@ ipcMain.on('asynchronous-message', (event, arg) => {
 ipcMain.on('synchronous-message', (event, arg) => {
  console.log(arg) // prints "ping"
  event.returnValue = 'pong'
+ sendGrpcRequest()
 })

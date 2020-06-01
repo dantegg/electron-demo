@@ -12,7 +12,7 @@ let mainConfig = {
   entry: {
     main: path.join(__dirname, '../src/main/index.js'),
     // foo: path.join(__dirname, '../src/main/foo.js'),
-    grpcClient: path.join(__dirname, '../src/main/grpcClient.js')
+    // grpcClient: path.join(__dirname, '../src/main/grpcClient.js')
   },
   externals: [
     ...Object.keys(dependencies || {})
