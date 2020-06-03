@@ -7,7 +7,6 @@ const { dependencies } = require('../package.json')
 const webpack = require('webpack')
 
 const MinifyPlugin = require("babel-minify-webpack-plugin")
-
 let mainConfig = {
   entry: {
     main: path.join(__dirname, '../src/main/index.js'),
@@ -21,7 +20,12 @@ let mainConfig = {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        },
         exclude: /node_modules/
       },
       {
