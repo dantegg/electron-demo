@@ -1,4 +1,4 @@
-# grpc-electron
+# grpc-electron-app
 
 > An electron-vue project
 

@@ -7,11 +7,10 @@ const { dependencies } = require('../package.json')
 const webpack = require('webpack')
 
 const MinifyPlugin = require("babel-minify-webpack-plugin")
+
 let mainConfig = {
   entry: {
-    main: path.join(__dirname, '../src/main/index.js'),
-    // foo: path.join(__dirname, '../src/main/foo.js'),
-    // grpcClient: path.join(__dirname, '../src/main/grpcClient.js')
+    main: path.join(__dirname, '../src/main/index.js')
   },
   externals: [
     ...Object.keys(dependencies || {})
@@ -20,12 +19,7 @@ let mainConfig = {
     rules: [
       {
         test: /\.js$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
-          }
-        },
+        use: 'babel-loader',
         exclude: /node_modules/
       },
       {

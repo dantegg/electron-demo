@@ -1,5 +1,5 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
-import { sendGrpcRequest } from './grpcClient'
+import { app, BrowserWindow } from 'electron'
+
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -63,19 +63,3 @@ app.on('ready', () => {
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
 })
  */
-
-
-app.on('ready', () => {
-  
-})
-
-ipcMain.on('asynchronous-message', (event, arg) => {
- console.log(arg) // prints "ping"
- event.sender.send('asynchronous-reply', 'pong')
-})
- 
-ipcMain.on('synchronous-message', (event, arg) => {
- console.log(arg) // prints "ping"
- event.returnValue = 'pong'
- sendGrpcRequest()
-})

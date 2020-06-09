@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'grpc-electron'
+    name: 'grpc-electron-app'
   }
 </script>
 

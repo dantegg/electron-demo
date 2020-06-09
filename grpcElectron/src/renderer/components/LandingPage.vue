@@ -1,14 +1,42 @@
 <template>
-  <div>
-    <a-button type="primary" @click="testOpen()">
-      Primary
-    </a-button>
+  <div id="wrapper">
+    <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
+    <main>
+      <div class="left-side">
+        <span class="title">
+          Welcome to your new project!
+        </span>
+        <system-information></system-information>
+      </div>
+
+      <div class="right-side">
+        <div class="doc">
+          <div class="title">Getting Started</div>
+          <p>
+            electron-vue comes packed with detailed documentation that covers everything from
+            internal configurations, using the project structure, building your application,
+            and so much more.
+          </p>
+          <button @click="open('https://simulatedgreg.gitbooks.io/electron-vue/content/')">Read the Docs</button><br><br>
+        </div>
+        <div class="doc">
+          <div class="title alt">Other Documentation</div>
+          <button class="alt" @click="open('https://electron.atom.io/docs/')">Electron</button>
+          <button class="alt" @click="open('https://vuejs.org/v2/guide/')">Vue.js</button>
+          <button class="alt" @click="test()">test</button>
+        </div>
+      </div>
+    </main>
   </div>
 </template>
 
 <script>
+  import path from 'path'
+  import grpc from 'grpc'
   import SystemInformation from './LandingPage/SystemInformation'
-  import { ipcRenderer } from 'electron'
+
+  const helloProto = grpc.load(path.join(`${__dirname}/../../protos/helloworld.proto`)).helloworld
+  const client = new helloProto.Greeter('localhost:50055', grpc.credentials.createInsecure())
   export default {
     name: 'landing-page',
     components: { SystemInformation },
@@ -16,17 +44,13 @@
       open (link) {
         this.$electron.shell.openExternal(link)
       },
-      testOpen() {
-        console.log("test");
-        // this.foo.getTest();
-        // console.log(this.foo)
-        console.log(ipcRenderer.sendSync('synchronous-message', 'ping')) // prints "pong"
-        ipcRenderer.on('asynchronous-reply', (event, arg) => {
-            console.log("async: " + arg) // prints "pong"
+      test() {
+        let name = 'dante'
+        let city = 'shanghai'
+        client.SayHello({ name, city }, (err, response) => {
+          alert(response.message)
+          console.log(`Greeting ${response.message}`, err)
         })
-        ipcRenderer.send('asynchronous-message', 'ping')
-        console.log("=========================")
-        // this.grpcClient.sendGrpcRequest();
       }
     }
   }
@@ -96,7 +120,7 @@
     margin-bottom: 10px;
   }
 
-  /* .doc button {
+  .doc button {
     font-size: .8em;
     cursor: pointer;
     outline: none;
@@ -108,7 +132,7 @@
     transition: all 0.15s ease;
     box-sizing: border-box;
     border: 1px solid #4fc08d;
-  } */
+  }
 
   .doc button.alt {
     color: #42b983;

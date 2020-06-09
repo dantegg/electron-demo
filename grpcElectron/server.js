@@ -1,67 +1,41 @@
-'use strict';
+var PROTO_PATH = __dirname + '/protos/helloworld.proto';
 
-const path = require('path');
-const grpc = require('grpc');
-const protoLoader = require('@grpc/proto-loader');
-var fs = require('fs');
-
-// 从 proto 文件加载服务描述符
-const PROTO_PATH = path.resolve(__dirname, 'protos/helloworld.proto');
-const PROTO_PATH2 = path.resolve(__dirname, 'protos/test.proto')
-console.log("path is " + PROTO_PATH)
-
-fs.writeFileSync(PROTO_PATH2, 'this is a demo test');
-
-const packageDefinition = protoLoader.loadSync(
+var grpc = require('grpc');
+var protoLoader = require('@grpc/proto-loader');
+var packageDefinition = protoLoader.loadSync(
   PROTO_PATH,
   {
-      keepCase: true,
-      longs: String,
-      enums: String,
-      defaults: true,
-      oneofs: true
-  }
-);
-const hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
-
-// SayHello的实现，调用call.request为protobuf文件的请求体，将返回体通过callback函数回传至客户端。
-function sayHello2(call, callback) {
-  try {
-    let data = 'hello ' + call.request.name + ' and city is ' + call.request.city;
-    callback && callback(null, {message: data})
-  } catch (err) {
-    console.log('错误');
-    callback && callback(err)
-  }
-}
-
-function printAge2(call, callback) {
-  try{
-    let text = 'current age is ' + call.request.age;
-    callback && callback(null, {text})
-  } catch (err) {
-    console.log('错误');
-    callback && callback(err)
-  }
-}
-
-// 服务器的启动方法
-/*
-1、通过 Greeter 服务描述符创建一个 Server 构造函数。
-2、实现服务的方法。
-3、通过调用 Server 的构造函数以及方法实现去创建一个服务器的实例。
-4、用实例的 bind() 方法指定地址以及我们期望客户端请求监听的端口。
-5、调用实例的 start() 方法启动一个RPC服务器。
-*/
-function main() {
-  const server = new grpc.Server();
-  server.addService(hello_proto.Greeter.service, {
-    SayHello: sayHello2,
-    printAge: printAge2
+    keepCase: true,
+    longs: String,
+    enums: String,
+    defaults: true,
+    oneofs: true
   });
-  server.bind('127.0.0.1:50051', grpc.ServerCredentials.createInsecure());
+var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
+
+/**
+ * Implements the SayHello RPC method.
+ */
+function sayHello(call, callback) {
+  // call 是 gRPC 给封装好的对象
+  // callback 是client要执行的回调
+  // request对象中,只有message中定义的字段
+  console.log(call.request)
+  // callback 第一个参数,如果报错可以传入 error
+  let err = null
+  callback(err, { message: 'Hello ' + call.request.name });
+}
+
+/**
+ * Starts an RPC server that receives requests for the Greeter service at the
+ * sample server port
+ */
+function main() {
+  var server = new grpc.Server();
+  server.addService(hello_proto.Greeter.service, { sayHello: sayHello });
+  server.bind('0.0.0.0:50055', grpc.ServerCredentials.createInsecure());
   server.start();
-  console.log('server start......')
+  console.log("server start...")
 }
 
 main();
