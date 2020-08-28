@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package simplerpc;
+
+/**
+ * 一个简单的RPC，由客户端向服务器发送请求并等待响应返回
+ */
+service SimpleRPC {
+  rpc GetFeature(Point) returns (Feature) {};
+}
+
+// 点
+message Point {
+  // 纬度
+  int32 latitude = 1;
+  // 经度
+  int32 longitude = 2;
+}
+
+// 特征
+message Feature {
+  string name = 1;
+  // 位置
+  Point location = 2;
+}
