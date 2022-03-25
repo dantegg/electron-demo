@@ -12,7 +12,7 @@
   "dependencies": {
     "@grpc/proto-loader": "^0.5.5",
     "async": "^3.2.0",
-    "electron": "^4.2.12",
+    "electron": "^13.6.6",
     "electron-log": "^4.2.4",
     "electron-rebuild": "^2.0.1",
     "google-protobuf": "^3.13.0",
